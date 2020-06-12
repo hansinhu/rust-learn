@@ -11,10 +11,11 @@ fn main() {
   print_value(188, 166);
 
   let value: i32 = 2;
-  increase_by_one(value);
   println!("After increase_by_one: {}", increase_by_one(value));
+  println!("Origin value is: {}", value);
 
 
+  // if 语句
   let x: &str = "5";
  
   if x == "5" {
@@ -25,37 +26,39 @@ fn main() {
     println!("I dont know what X is.");
   }
 
+  // while 循环
   let mut y = 0;
  
-  while y != 5 {
+  while y != 3 {
     println!("y: {}", y);
     y += 1; // this is equal to x = x + 1;
   }
 
+  // loop 循环
   let mut z = 0;
   loop {
-    if z == 5 {
+    if z == 3 {
       break;
     }
     println!("z: {}", z);
     z += 1;
   }
 
-  for w in 0..5 {
+  // for in 循环
+  for w in 0..3 {
     println!("w: {}", w);
   }
 
-
-  let h = vec![0, 1, 2, 3, 4];
-  for element in &h { //&h 表示 for 循环“借用了”矢量，该概念将在下一节中介绍
+  let h = vec![0, 1, 2, 3];
+  for element in &h { // &h 表示 for 循环“借用了”矢量，该概念将在下一节中介绍
     println!("element: {}", element);
   }
 
   // 所有权问题
   let mut q = vec![1, 2, 3];
   push_five(&mut q);
-  let q = print_vector(&mut q);
-  println!("{:?}", q);
+  let q2 = print_vector(&mut q);
+  println!("{:?}", q == q2);
 
   // 对象1
   let c_1 = Circle {
@@ -136,8 +139,12 @@ fn push_five(v: &mut Vec<i32>) {
   v.push(5);
 }
 
-fn print_vector(v: &Vec<i32>) {
-  println!("I borrowed this data: {:?}", v);
+fn print_vector(v: &Vec<i32>) -> Vec<i32> {
+  let mut v2 = v.clone();
+  v2.push(6);
+  println!("I borrowed this data v: {:?}", v);
+  println!("I borrowed this data v2: {:?}", v2);
+  return v2;
 }
 
 struct Circle {
