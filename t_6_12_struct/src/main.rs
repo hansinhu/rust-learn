@@ -64,7 +64,7 @@ fn rectangles () {
   println!( "area2：{}", area2(&rect2));
   println!( "rect2 is: {:#?}", rect2);
 
-  // 定义方法
+  // 定义方法 fn
   impl Rectangle {
       fn area(&self) -> u32 {
           self.width * self.height
@@ -74,12 +74,15 @@ fn rectangles () {
       }
 
       // 关联函数 associated functions
-      fn square(size: u32) -> Rectangle {
-          Rectangle {
-              width: size,
-              height: size,
-          }
-      }
+      // 定义范围内的功能impl块是不带self作为参数。这些被称为关联函数，因为它们与结构关联。
+      // 它们仍然是函数，而不是方法，因为它们没有可使用的结构实例。您已经使用了String::from关联的功能。
+      // 要调用此关联函数，我们使用::带有结构名称的语法； 如 let sq = Rectangle::square(3);
+      // fn square(size: u32) -> Rectangle {
+      //     Rectangle {
+      //         width: size,
+      //         height: size,
+      //     }
+      // }
   }
 
   let rect3 = Rectangle {
